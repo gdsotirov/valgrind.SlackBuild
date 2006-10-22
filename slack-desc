@@ -1,0 +1,11 @@
+valgrind: Valgrind (debugging and profiling suite)
+valgrind:
+valgrind: Valgrind is an award-winning suite of tools for debugging and
+valgrind: profiling x86-Linux programs. With the tools that come with Valgrind,
+valgrind: you can automatically detect many memory management and threading
+valgrind: bugs and perform detailed profiling. The Valgrind distribution
+valgrind: currently includes five tools: two memory error detectors, a thread
+valgrind: error detector, a cache profiler and a heap profiler.
+valgrind: Valgrind is Open Source / Free Software, and is freely available
+valgrind: under the GNU General Public License.
+valgrind: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
