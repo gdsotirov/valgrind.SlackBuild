@@ -7,7 +7,7 @@
 . /etc/slack-package.conf
 
 NAME=valgrind
-VERSION=3.2.2
+VERSION=3.2.3
 BUILD=1
 ARCH=${ARCH:-i486}
 
