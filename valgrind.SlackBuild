@@ -7,7 +7,7 @@
 . /etc/slack-package.conf
 
 NAME=valgrind
-VERSION=3.4.1
+VERSION=3.5.0
 BUILD=1
 ARCH=${ARCH:-i486}
 
@@ -17,21 +17,12 @@ SRC=$TMP/$NAME-$VERSION
 cd $SRC
 fix_source
 
-# Need to force valgrind CFLAGS
-sed -i -e "s/-O -g/$SLKCFLAGS/" auxprogs/Makefile.in
-sed -i -e "s/-O -g/$SLKCFLAGS/" coregrind/Makefile.in
-sed -i -e "s/-O -g/$SLKCFLAGS/" cachegrind/Makefile.in
-sed -i -e "s/-O -g/$SLKCFLAGS/" helgrind/Makefile.in
-sed -i -e "s/-O -g/$SLKCFLAGS/" lackey/Makefile.in
-sed -i -e "s/-O -g/$SLKCFLAGS/" Makefile.flags.am
-sed -i -e "s/-O -g/$SLKCFLAGS/" massif/hp2ps/Makefile.am
-sed -i -e "s/-O -g/$SLKCFLAGS/" massif/hp2ps/Makefile.in
-sed -i -e "s/-O -g/$SLKCFLAGS/" massif/Makefile.in
-sed -i -e "s/-O -g/$SLKCFLAGS/" memcheck/Makefile.in
-sed -i -e "s/-O -g/$SLKCFLAGS/" none/Makefile.in
-
+CFLAGS=$SLKCFLAGS \
+CXXFLAGS=$SLKCFLAGS \
 ./configure --build=$ARCH-pc-linux-gnu \
             --prefix=/usr \
+            --sysconfdir=/etc \
+            --localstatedir=/var \
             --enable-tls \
             --with-x || exit 1
 
