@@ -1,11 +1,20 @@
-valgrind: Valgrind (debugging and profiling suite)
+valgrind: Valgrind (A debugging and profiling suite)
 valgrind:
-valgrind: Valgrind is an award-winning suite of tools for debugging and
-valgrind: profiling x86-Linux programs. With the tools that come with Valgrind,
-valgrind: you can automatically detect many memory management and threading
-valgrind: bugs and perform detailed profiling. The Valgrind distribution
-valgrind: currently includes five tools: two memory error detectors, a thread
-valgrind: error detector, a cache profiler and a heap profiler.
+valgrind: Valgrind is an instrumentation framework for building dynamic
+valgrind: analysis tools.  There are Valgrind tools that can automatically
+valgrind: detect many memory management and threading bugs, and profile
+valgrind: your programs in detail.  You can also use Valgrind to build new
+valgrind: tools.
+valgrind: The Valgrind distribution currently includes six production-quality
+valgrind: tools: a memory error detector, two thread error detectors, a cache
+valgrind: and branch-prediction profiler, a call-graph generating cache and
+valgrind: branch-prediction profiler, and a heap profiler.  It also includes
+valgrind: three experimental tools: a heap/stack/global array overrun
+valgrind: detector, a second heap profiler that examines how heap blocks are
+valgrind: used, and a SimPoint basic block vector generator.  It runs on the
+valgrind: following platforms: X86/Linux, AMD64/Linux, ARM/Linux, PPC32/Linux,
+valgrind: PPC64/Linux, X86/Darwin and AMD64/Darwin (Mac OS X 10.5 and 10.6).
 valgrind: Valgrind is Open Source / Free Software, and is freely available
-valgrind: under the GNU General Public License.
+valgrind: under the GNU General Public License, version 2.
+valgrind:
 valgrind: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
