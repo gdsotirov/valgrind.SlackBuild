@@ -1,7 +1,15 @@
 #/bin/sh
 
+ARCH=`uname -m`
+
+if [ "x$ARCH" = "xx86_64" ]; then
+  LIBDIRSUFFIX=64
+else
+  LIBDIRSUFFIX=
+fi
+
 # Check for stripped /lib/ld.so
-LD_LIB=`ls /lib/ld*.so`
+LD_LIB=`ls /lib${LIBDIRSUFFIX}/ld*.so`
 DBG_SYMS=`nm --debug-syms ${LD_LIB} | wc -l`
 if (( DBG_SYMS > 0 )); then
   echo "INFO: Your system $LD_LIB library has debugging symbols."
