@@ -19,16 +19,16 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: valgrind.SlackBuild,v 1.13 2012/08/23 20:57:07 gsotirov Exp $
+# $Id: valgrind.SlackBuild,v 1.14 2012/08/23 21:31:11 gsotirov Exp $
 #
+
+. ../../slack-package.conf
 
 NAME=valgrind
 VERSION=3.8.0
 BUILD=${BUILD:-1}
 ARCH=${ARCH:-i486}
 CWD=${CWD:-`pwd`}
-
-. ../../slack-package.conf
 
 if [ ! -e $TMP ]; then
   mkdir -p $TMP # location to build the source
