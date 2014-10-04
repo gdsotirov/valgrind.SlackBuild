@@ -19,7 +19,7 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: valgrind.SlackBuild,v 1.11 2011/02/19 22:22:10 gsotirov Exp $
+# $Id: valgrind.SlackBuild,v 1.11.2.1 2014/10/04 08:24:46 gsotirov Exp $
 #
 
 NAME=valgrind
@@ -28,7 +28,7 @@ BUILD=${BUILD:-1}
 ARCH=${ARCH:-i486}
 CWD=${CWD:-`pwd`}
 
-. ../slack-package.conf
+. ../../slack-package.conf
 
 if [ ! -e $TMP ]; then
   mkdir -p $TMP # location to build the source
@@ -61,7 +61,7 @@ CFLAGS=$SLKCFLAGS \
 CXXFLAGS=$SLKCFLAGS \
 ./configure --build=$ARCH-pc-linux-gnu \
             --prefix=/usr \
-            --libdir=/usr/lib \
+            --libdir=/usr/lib${LIBDIRSUFFIX} \
             --sysconfdir=/etc \
             --localstatedir=/var/lib \
             --infodir=/usr/info \
