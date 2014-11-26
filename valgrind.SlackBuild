@@ -19,13 +19,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: valgrind.SlackBuild,v 1.16 2014/10/05 08:14:06 gsotirov Exp $
+# $Id: valgrind.SlackBuild,v 1.17 2014/11/26 18:31:13 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=valgrind
-VERSION=3.10.0
+VERSION=3.10.1
 BUILD=${BUILD:-1}
 ARCH=${ARCH:-i486}
 CWD=${CWD:-`pwd`}
