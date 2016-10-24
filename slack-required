@@ -1,8 +1,9 @@
-binutils >= 2.23.52.0.1 | util-linux >= 2.21.2
-gcc >= 4.8.2
-gdb >= 7.6.1 | glib2 >= 2.36.4
-glibc-solibs >= 2.17
-grep >= 2.14
-libpciaccess >= 0.13.2
-openmpi >= 1.8.3
-perl >= 5.18
+binutils >= 2.26 | util-linux >= 2.27.1
+eudev >= 3.1.5
+gcc >= 5.3.0
+gdb >= 7.11.1
+glibc-solibs >= 2.23
+grep >= 2.25
+libpciaccess >= 0.13.4
+openmpi >= 2.0.1
+perl >= 5.22
