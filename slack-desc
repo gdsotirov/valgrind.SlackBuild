@@ -17,4 +17,4 @@ valgrind: PPC64/Linux, X86/Darwin and AMD64/Darwin (Mac OS X 10.5 and 10.6).
 valgrind: Valgrind is Open Source / Free Software, and is freely available
 valgrind: under the GNU General Public License, version 2.
 valgrind:
-valgrind: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
+valgrind: Packaged by Georgi D. Sotirov <gdsotirov@gmail.com>
