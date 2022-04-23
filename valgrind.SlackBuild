@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Slackware build script for Valgrind
-# Copyright (C) 2006-2020 Georgi D. Sotirov <gdsotirov@gmail.com>
+# Copyright (C) 2006-2022 Georgi D. Sotirov <gdsotirov@gmail.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ BUILD=${BUILD:-1}
 CWD=${CWD:-`pwd`}
 
 if [ ! -e $TMP ]; then
-  mkdir -p $TMP # location to build the source
+  mkdir --parents $TMP # location to build the source
 fi
 
 SRC=$TMP/${NAME}-${VERSION}
@@ -44,10 +44,10 @@ if [ -e $PKG -a -d $PKG ]; then
   echo "Package creation directory '$PKG' already exists! Please, move it or remove it."
   exit 2
 fi
-mkdir -p $PKG
+mkdir --parents $PKG
 
 cd $TMP
-tar -xvf $CWD/${NAME}-${VERSION}.tar.bz2 || exit 1
+tar --extract --verbose --file=$CWD/${NAME}-${VERSION}.tar.bz2 || exit 3
 cd $SRC
 fix_source
 
@@ -62,26 +62,26 @@ fi
 
 # Apply patches (if any)
 if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
-  patch -p1 < $CWD/${NAME}-${VERSION}.diff || exit 2
+  patch --backup --strip=1 --suffix=.orig < $CWD/${NAME}-${VERSION}.diff || exit 4
 fi
 
 # Configure
 # Note: The build is not relocatable - valgrind should be installed in /bin
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-./configure --build=${ARCH}-pc-linux-gnu \
+./configure --build="${ARCH}-pc-linux-gnu" \
             --prefix=/usr \
             --sysconfdir=/etc \
-            --libdir=/usr/lib${LIBDIRSUFFIX} \
+            --libdir="/usr/lib${LIBDIRSUFFIX}" \
             --localstatedir=/var/lib \
             --infodir=/usr/info \
             --mandir=/usr/man \
-	    ${PLATFORM_OPTION} \
-	    --enable-tls || exit 3
+            ${PLATFORM_OPTION} \
+            --enable-tls || exit 5
 
 # Build & install
-make -j4 || exit 4
-make DESTDIR=$PKG install || exit 5
+make --jobs 8 || exit 6
+make DESTDIR=$PKG install || exit 7
 
 # Prepare
 sbin_perms $PKG
@@ -91,38 +91,37 @@ sbin_perms $PKG
 gzip_man $PKG
 create_docs $PKG ${NAME}-${VERSION}
 # Remove pdf and ps manual
-rm -f $PKG/usr/doc/${NAME}-${VERSION}/docs/index.pdf
-rm -f $PKG/usr/doc/${NAME}-${VERSION}/docs/index.ps
+rm --force $PKG/usr/doc/${NAME}-${VERSION}/docs/index.pdf
+rm --force $PKG/usr/doc/${NAME}-${VERSION}/docs/index.ps
 # Remove manual and documentation (they are in usr/doc)
-rm $PKG/usr/share -rf
+rm --force --recursive $PKG/usr/share
 
-mkdir -p $PKG/install
-install -m 644 $CWD/doinst.sh      $PKG/install/doinst.sh
-install -m 644 $CWD/slack-desc     $PKG/install/slack-desc
-install -m 644 $CWD/slack-required $PKG/install/slack-required
-install -m 644 $CWD/slack-suggests $PKG/install/slack-suggests
+install --mode 755 --directory $PKG/install
+install --mode 644 $CWD/doinst.sh      $PKG/install/doinst.sh
+install --mode 644 $CWD/slack-desc     $PKG/install/slack-desc
+install --mode 644 $CWD/slack-required $PKG/install/slack-required
+install --mode 644 $CWD/slack-suggests $PKG/install/slack-suggests
 
 SBDIR=$PKG/usr/src/slackbuilds/${NAME}-${VERSION}
-mkdir -p "${SBDIR}"
-install -m 644 $CWD/doinst.sh          ${SBDIR}/doinst.sh
-install -m 644 $CWD/slack-desc         ${SBDIR}/slack-desc
-install -m 644 $CWD/slack-required     ${SBDIR}/slack-required
-install -m 644 $CWD/slack-suggests     ${SBDIR}/slack-suggests
+install --mode 755 --directory "${SBDIR}"
+install --mode 644 $CWD/doinst.sh          ${SBDIR}/doinst.sh
+install --mode 644 $CWD/slack-desc         ${SBDIR}/slack-desc
+install --mode 644 $CWD/slack-required     ${SBDIR}/slack-required
+install --mode 644 $CWD/slack-suggests     ${SBDIR}/slack-suggests
 if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
-  install -m 644 $CWD/${NAME}-${VERSION}.diff ${SBDIR}/${NAME}-${VERSION}.diff
+install --mode 644 $CWD/${NAME}-${VERSION}.diff ${SBDIR}/${NAME}-${VERSION}.diff
 fi
-install -m 644 $CWD/${NAME}.SlackBuild ${SBDIR}/${NAME}.SlackBuild
+install --mode 644 $CWD/${NAME}.SlackBuild ${SBDIR}/${NAME}.SlackBuild
 
 # Assemble package
 cd $PKG
 PKGNAME=${NAME}-${VERSION}-${ARCH}-${BUILD}${MYIN}
-makepkg -l y -c n $PKG_DIR/${PKGNAME}.txz
-cd $PKG_DIR
-md5sum ${PKGNAME}.txz > ${PKGNAME}.txz.md5
-cat $PKG/install/slack-desc > $PKG_DIR/${PKGNAME}.txt
+makepkg --chown n --linkadd y $PKG_DIR/${PKGNAME}.txz
+md5sum $PKG_DIR/${PKGNAME}.txz > $PKG_DIR/${PKGNAME}.txz.md5
+install --mode 644 $PKG/install/slack-desc $PKG_DIR/${PKGNAME}.txt
 
 if [ "$1" == "--cleanup" ]; then
-  rm -r $SRC
-  rm -r $PKG
+  rm --recursive $SRC
+  rm --recursive $PKG
 fi
 
