@@ -97,21 +97,31 @@ rm --force $PKG/usr/doc/${NAME}-${VERSION}/docs/index.ps
 rm --force --recursive $PKG/usr/share
 
 install --mode 755 --directory $PKG/install
-install --mode 644 $CWD/doinst.sh      $PKG/install/doinst.sh
-install --mode 644 $CWD/slack-desc     $PKG/install/slack-desc
-install --mode 644 $CWD/slack-required $PKG/install/slack-required
-install --mode 644 $CWD/slack-suggests $PKG/install/slack-suggests
+install --mode 644 --preserve-timestamps \
+        $CWD/doinst.sh      $PKG/install/doinst.sh
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-desc     $PKG/install/slack-desc
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-required $PKG/install/slack-required
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-suggests $PKG/install/slack-suggests
 
 SBDIR=$PKG/usr/src/slackbuilds/${NAME}-${VERSION}
 install --mode 755 --directory "${SBDIR}"
-install --mode 644 $CWD/doinst.sh          ${SBDIR}/doinst.sh
-install --mode 644 $CWD/slack-desc         ${SBDIR}/slack-desc
-install --mode 644 $CWD/slack-required     ${SBDIR}/slack-required
-install --mode 644 $CWD/slack-suggests     ${SBDIR}/slack-suggests
+install --mode 644 --preserve-timestamps \
+        $CWD/doinst.sh               ${SBDIR}/doinst.sh
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-desc              ${SBDIR}/slack-desc
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-required          ${SBDIR}/slack-required
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-suggests          ${SBDIR}/slack-suggests
 if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
-install --mode 644 $CWD/${NAME}-${VERSION}.diff ${SBDIR}/${NAME}-${VERSION}.diff
+install --mode 644 --preserve-timestamps \
+        $CWD/${NAME}-${VERSION}.diff ${SBDIR}/${NAME}-${VERSION}.diff
 fi
-install --mode 644 $CWD/${NAME}.SlackBuild ${SBDIR}/${NAME}.SlackBuild
+install --mode 644 --preserve-timestamps \
+        $CWD/${NAME}.SlackBuild      ${SBDIR}/${NAME}.SlackBuild
 
 # Assemble package
 cd $PKG
