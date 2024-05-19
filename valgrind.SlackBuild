@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Slackware build script for Valgrind
-# Copyright (C) 2006-2023 Georgi D. Sotirov <gdsotirov@gmail.com>
+# Copyright (C) 2006-2024 Georgi D. Sotirov <gdsotirov@gmail.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 . ../../slack-package.conf
 
 NAME=valgrind
-VERSION=3.22.0
+VERSION=3.23.0
 ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
 
