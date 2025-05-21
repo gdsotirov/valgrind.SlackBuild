@@ -23,7 +23,7 @@
 . ../../slack-package.conf
 
 NAME=valgrind
-VERSION=3.25.0
+VERSION=3.25.1
 ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
 
